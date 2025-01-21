@@ -1,16 +1,78 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login,logout
+from django.contrib import messages
+from datetime import datetime, timedelta
 from django.core.mail import send_mail
 from django.conf import settings
 import random
-from datetime import datetime, timedelta
+from .models import Gallery
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    if request.method == 'POST' and 'image' in request.FILES:  # Ensure the 'image' key is in request.FILES
+        myimage = request.FILES['image']  # Access the uploaded image from request.FILES
+        # Create an instance of Gallery and save the image  # Save the object to the database
+        # return redirect('index')  # Redirect back to the index page after saving
+        todo123=request.POST.get("todo")
+        todo321=request.POST.get("date")
+        todo311=request.POST.get("course")  
+        print(myimage)
+        obj=Gallery(title1=todo123,title2=todo321,title3=todo311,feedimage=myimage)
+        obj.save()
+        data=Gallery.objects.all()
+        return redirect('index')
+    # Retrieve all gallery images to display
+    gallery_images = Gallery.objects.all()
+    return render(request, "index.html")
+
+def sellersignup(request):
+    if request.POST:
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        confirmpassword = request.POST.get('confpassword')
+
+        # Validate form fields
+        if not username or not email or not password or not confirmpassword:
+            messages.error(request, 'All fields are required.')
+        elif confirmpassword != password:
+            messages.error(request, "Passwords do not match.")
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists.")
+        elif User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists.")
+        else:
+            # Create the user
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.is_staff = True
+            user.save()
+            messages.success(request, "Account created successfully!")
+            return redirect('sellerlogin')  # Redirect to login page
+
+    return render(request, "register.html")
+
+def sellerlogin(request):
+    if 'username' in request.session:
+        return redirect('index')  
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            request.session['username'] = username
+            if user.is_staff:
+                return redirect('index')
+            return redirect('firstpage')  # Redirect to the home page
+        else:
+            messages.error(request, "Invalid credentials.")
+
+    return render(request, 'sellerlogin.html')
+
 def usersignup(request):
     if request.POST:
         email = request.POST.get('email')
@@ -32,13 +94,13 @@ def usersignup(request):
             user = User.objects.create_user(username=username, email=email, password=password)
             user.save()
             messages.success(request, "Account created successfully!")
-            return redirect('userlogin')  
+            return redirect('loginuser')  
 
     return render(request, "signup.html")
 
 def loginuser(request):
     if 'username' in request.session:
-        return redirect('index')  
+        return redirect('firstpage')  
     
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -48,17 +110,24 @@ def loginuser(request):
         if user is not None:
             login(request, user)
             request.session['username'] = username
-            return redirect('index')  # Redirect to the home page
+            return redirect('firstpage')  
         else:
             messages.error(request, "Invalid credentials.")
-
+            
     return render(request, 'login.html')
+
+def firstpage(request):
+    gallery_images = Gallery.objects.all()
+    return render(request, "userindex.html", {
+        "gallery_images": gallery_images, 
+        "feeds": gallery_images  # Use the same queryset instead of querying twice
+    })
 
 def verifyotp(request):
     if request.POST:
         otp = request.POST.get('otp')
         otp1 = request.session.get('otp')
-        otp_time_str = request.session.get('otp_time')  # This is now a string, not a datetime object
+        otp_time_str = request.session.get('otp_time') 
 
         # Check if OTP is expired
         if otp_time_str:
@@ -139,7 +208,8 @@ def passwordreset(request):
 
     return render(request, "passwordreset.html")
 
+
 def logoutuser(request):
     logout(request)
     request.session.flush()
-    return redirect(loginuser)
+    return redirect('loginuser')
