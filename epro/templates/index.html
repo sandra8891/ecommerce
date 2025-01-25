@@ -4,11 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <title>index</title>
 </head>
 <body>
-    <h1>welcome</h1>
-    <a href="{% url 'logout' %}">logout</a>
+    <body>
+        <div class="topnav">
+            <p>SIGN UP FOR 15% OFF</p>
+        </div>
+        <div class="nav">
+            <div class="logo">
+                <img src="{% static 'image/crocslogo.svg' %}" alt="crocs">
+            </div>
+            <div class="left">
+                <div>SHOP NOW</div>
+                <div>REVIEWS</div>
+                <div>ABOUT US</div>
+                <div>CONTACT US</div>
+            </div>
+            <div class="right">
+                <div><input type="search" placeholder="Product Code"> </div>
+                <div><i class="bi bi-search"></i></div>
+                <div><i class="bi bi-facebook"></i></div>
+            </div>
+        </div>
+    </body>
+    
+    <a href="{% url 'sellerlogout' %}">logout</a>
 </body>
 </html>

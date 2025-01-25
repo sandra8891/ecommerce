@@ -213,3 +213,8 @@ def logoutuser(request):
     logout(request)
     request.session.flush()
     return redirect('loginuser')
+
+def logoutseller(request):
+    logout(request)
+    request.session.flush()
+    return redirect('sellerlogin')

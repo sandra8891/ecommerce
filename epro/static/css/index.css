@@ -1,0 +1,86 @@
+/* Reset margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Top Navigation Bar */
+.topnav {
+    background-color: black;
+    padding-left: 80px;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+}
+
+/* Main Navigation Bar */
+.nav {
+    background-color: white;
+    display: flex;
+    color: black;
+    padding: 10px 90px;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid black; /* Border on the top */
+    border-bottom: 2px solid black; /* Border on the bottom */
+    /* No left or right border */
+}
+
+/* Logo Section */
+.logo img {
+    max-height: 50px; /* Adjust logo size */
+    width: auto;
+}
+
+/* Left Menu Items */
+.left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.left div {
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+.left div:hover {
+    color: rgb(243, 196, 135); /* Hover effect for links */
+}
+
+/* Right Section (Search Bar & Icons) */
+.right {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.right div {
+    margin: 0 15px;
+}
+
+.right input[type="search"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/* Icons styling */
+.bi {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.bi:hover {
+    color: rgb(243, 196, 135); /* Hover effect for icons */
+}
+
+/* Responsiveness: Adjust layout on smaller screens */
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        padding: 20px
+    }
+}

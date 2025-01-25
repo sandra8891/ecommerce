@@ -12,6 +12,7 @@ urlpatterns = [
     path('passwordreset',views.passwordreset,name='passwordreset'),
     path('sellerindex',views.index,name='index'),
     path('logout',views.logoutuser,name="logout"),
+    path('sellerlogout',views.logoutseller,name="sellerlogout"),
     path('userindex',views.firstpage,name="firstpage"),  # Changed from 'userindex' to 'firstpage'
     path('sellerlogin',views.sellerlogin,name='sellerlogin'),
     path('sellersignup',views.sellersignup,name='sellersignup'),
