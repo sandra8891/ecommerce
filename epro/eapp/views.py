@@ -1,16 +1,16 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.contrib import messages
-from datetime import datetime, timedelta
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login,logout
 from django.core.mail import send_mail
 from django.conf import settings
 import random
-from .models import Gallery
+from datetime import datetime, timedelta
+from .models import *
 
 
 # Create your views here.
-def index(request):
+def gallery(request):
     if request.method == 'POST' and 'image' in request.FILES:  # Ensure the 'image' key is in request.FILES
         myimage = request.FILES['image']  # Access the uploaded image from request.FILES
         # Create an instance of Gallery and save the image  # Save the object to the database
@@ -18,14 +18,13 @@ def index(request):
         todo123=request.POST.get("todo")
         todo321=request.POST.get("date")
         todo311=request.POST.get("course")  
-        print(myimage)
-        obj=Gallery(title1=todo123,title2=todo321,title3=todo311,feedimage=myimage)
+        obj=Gallery(title1=todo123,title2=todo321,title3=todo311,feedimage=myimage,user=request.user)
         obj.save()
         data=Gallery.objects.all()
-        return redirect('index')
-    # Retrieve all gallery images to display
+        return redirect('index')  # Assuming 'index' is the name of the URL pattern.
+        # Retrieve all gallery images to display
     gallery_images = Gallery.objects.all()
-    return render(request, "index.html")
+    return render(request, "galleryupload.html")
 
 def sellersignup(request):
     if request.POST:
@@ -207,6 +206,11 @@ def passwordreset(request):
                 return redirect('getusername')  # Redirect to username input form
 
     return render(request, "passwordreset.html")
+
+def index(request):
+    data = Gallery.objects.all()
+    gallery_images = Gallery.objects.filter(user=request.user)
+    return render(request,'index.html',{"gallery_images": gallery_images})
 
 
 def logoutuser(request):

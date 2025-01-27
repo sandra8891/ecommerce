@@ -10,12 +10,13 @@ urlpatterns = [
     path('forgotpassword',views.getusername,name='forgotpassword'),
     path('verifyotp',views.verifyotp,name='verifyotp'),
     path('passwordreset',views.passwordreset,name='passwordreset'),
-    path('sellerindex',views.index,name='index'),
+    path('gallery',views.gallery,name='gallery'),
     path('logout',views.logoutuser,name="logout"),
     path('sellerlogout',views.logoutseller,name="sellerlogout"),
     path('userindex',views.firstpage,name="firstpage"),  # Changed from 'userindex' to 'firstpage'
     path('sellerlogin',views.sellerlogin,name='sellerlogin'),
     path('sellersignup',views.sellersignup,name='sellersignup'),
+    path('sellerindex',views.index,name='index'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

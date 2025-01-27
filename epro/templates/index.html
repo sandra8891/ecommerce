@@ -8,7 +8,7 @@
     <title>index</title>
 </head>
 <body>
-    <body>
+
         <div class="topnav">
             <p>SIGN UP FOR 15% OFF</p>
         </div>
@@ -28,8 +28,18 @@
                 <div><i class="bi bi-facebook"></i></div>
             </div>
         </div>
-    </body>
     
-    <a href="{% url 'sellerlogout' %}">logout</a>
+        <a href="{% url 'gallery'%}"><button>uploding a product</button></a> 
+        {% for i in gallery_images %}
+        <div>
+            <img src="{{ i.feedimage.url }}" alt="Gallery Image" width="300">
+            <span>{{ i.title1 }}</span>
+            <span>{{ i.title2 }}</span>
+            <span>{{ i.title3 }}</span>
+            
+        </div>
+        {% endfor %}
+        <a href="{% url 'sellerlogout' %}">logout</a>
+
 </body>
 </html>
