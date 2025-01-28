@@ -212,6 +212,46 @@ def index(request):
     gallery_images = Gallery.objects.filter(user=request.user)
     return render(request,'index.html',{"gallery_images": gallery_images})
 
+def delete_g(request,id):
+    feeds=Gallery.objects.filter(pk=id)
+    feeds.delete()
+    return redirect('index')
+
+def edit_g(request, pk):
+    # Check if the gallery item exists
+    gallery_item = Gallery.objects.filter(pk=pk).first()
+
+    if not gallery_item:
+        # If the gallery item is not found, show an error message and redirect to the index page
+        messages.error(request, "Gallery item not found.")
+        return redirect('index')
+
+    if request.method == "POST":
+        # Get the updated values from the form submission
+        edit1 = request.POST.get('todo')
+        edit2 = request.POST.get('date')
+        edit3 = request.POST.get('course')
+
+        # Update the gallery item fields
+        gallery_item.title1 = edit1
+        gallery_item.title2 = edit2
+        gallery_item.title3 = edit3
+
+        # If an image is uploaded, update the image as well
+        if 'image' in request.FILES:
+            gallery_item.feedimage = request.FILES['image']
+
+        # Save the updated object to the database
+        gallery_item.save()
+
+        messages.success(request, "Gallery item updated successfully.")
+        return redirect('index')  # Redirect to the gallery index page after editing
+
+    else:
+        # If the request method is GET, pre-fill the form with the current data
+        return render(request, 'edit_gallery.html', {'data': gallery_item})
+
+
 
 def logoutuser(request):
     logout(request)
@@ -222,3 +262,4 @@ def logoutseller(request):
     logout(request)
     request.session.flush()
     return redirect('sellerlogin')
+
