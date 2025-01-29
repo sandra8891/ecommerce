@@ -21,27 +21,26 @@
                 <div>REVIEWS</div>
                 <div>ABOUT US</div>
                 <div>CONTACT US</div>
+                <a href="{% url 'gallery'%}"><button>uploding a product</button></a> 
+                <a href="{% url 'sellerlogout' %}"><button>logout</button></a>
             </div>
             <div class="right">
                 <div><input type="search" placeholder="Product Code"> </div>
                 <div><i class="bi bi-search"></i></div>
                 <div><i class="bi bi-facebook"></i></div>
             </div>
-        </div>
-    
-        <a href="{% url 'gallery'%}"><button>uploding a product</button></a> 
+        </div> <br><br><br>
         {% for i in gallery_images %}
         <div>
             <img src="{{ i.feedimage.url }}" alt="Gallery Image" width="300">
-            <a href="{% url 'edit_g' pk=i.id %}"><button>Edit</button></a>  
-            <a href="{% url 'deletion' i.id %}"><button>Delete</button></a>
             <span>{{ i.title1 }}</span>
             <span>{{ i.title2 }}</span>
             <span>{{ i.title3 }}</span>
+            <a href="{% url 'edit_g' pk=i.id %}"><button>Edit</button></a>  
+            <a href="{% url 'deletion' i.id %}"><button>Delete</button></a>
             
         </div>
         {% endfor %}
-        <a href="{% url 'sellerlogout' %}">logout</a>
 
 </body>
 </html>

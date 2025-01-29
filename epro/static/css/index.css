@@ -1,86 +1,180 @@
-/* Reset margin and padding */
-* {
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white; /* White background */
+    color: #333;
     margin: 0;
     padding: 0;
 }
 
+h1 {
+    font-size: 2.5rem;
+    color: #2874f0;
+    text-align: center;
+    margin-top: 20px;
+}
+
 /* Top Navigation Bar */
 .topnav {
-    background-color: black;
-    padding-left: 80px;
-    text-align: center;
-    font-size: 18px;
+    background-color: black; /* Black background */
     color: white;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
 }
 
 /* Main Navigation Bar */
 .nav {
-    background-color: white;
     display: flex;
-    color: black;
-    padding: 10px 90px;
     justify-content: space-between;
     align-items: center;
-    border-top: 2px solid black; /* Border on the top */
-    border-bottom: 2px solid black; /* Border on the bottom */
-    /* No left or right border */
+    padding: 10px 20px;
+    background-color: white; /* White background */
+    border-bottom: 2px solid black; /* Black border */
 }
 
-/* Logo Section */
-.logo img {
-    max-height: 50px; /* Adjust logo size */
-    width: auto;
+.nav .logo img {
+    height: 40px;
 }
 
-/* Left Menu Items */
-.left {
+.nav .left, .nav .right {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-top: 20px;
+    gap: 20px;
 }
 
-.left div {
-    margin: 0 20px;
+.nav .left div, .nav .right div {
+    color: black; /* Black text */
+    font-size: 16px;
     cursor: pointer;
 }
 
-.left div:hover {
-    color: rgb(243, 196, 135); /* Hover effect for links */
+.nav .right input[type="search"] {
+    padding: 8px;
+    border: 1px solid black; /* Black border */
+    border-radius: 4px;
+    background-color: white;
 }
 
-/* Right Section (Search Bar & Icons) */
-.right {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.right div {
-    margin: 0 15px;
-}
-
-.right input[type="search"] {
-    padding: 5px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-}
-
-/* Icons styling */
-.bi {
+.nav .right i {
     font-size: 20px;
+    color: black; /* Black icons */
     cursor: pointer;
 }
 
-.bi:hover {
-    color: rgb(243, 196, 135); /* Hover effect for icons */
+/* Gallery Section */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Responsiveness: Adjust layout on smaller screens */
+.gallery div {
+    background: white; /* White background */
+    border: 1px solid black; /* Black border */
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.gallery img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.gallery span {
+    display: block;
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Buttons */
+button {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #333; /* Darker black on hover */
+}
+
+/* Edit Button */
+.edit-button {
+    background-color: #4caf50; /* Green background */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+    background-color: #388e3c; /* Darker green on hover */
+}
+
+/* Delete Button */
+.delete-button {
+    background-color: #f44336; /* Red background */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+/* Logout Link */
+a {
+    text-decoration: none;
+    color: black; /* Black text */
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #2874f0; /* Blue on hover */
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .nav {
         flex-direction: column;
-        padding: 20px
+        gap: 10px;
+    }
+
+    .nav .left, .nav .right {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 }
