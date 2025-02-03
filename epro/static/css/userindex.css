@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: white;
+}
+
+/* Top Navigation */
+.topnav {
+    /* background-color: #f8f8f8; */
+    background-color: black;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    color: #333;
+    border-bottom: 1px solid #000;
+}
+
+/* Main Navigation Bar */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid black; /* Black border around the navigation */
+    padding: 0px;
+    position: relative;
+}
+
+/* Logo Styling */
+.logo img {
+    width: 120px;
+    height: auto;
+}
+
+/* Left-side navigation links */
+.left {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.left div {
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.left a {
+    text-decoration: none;
+}
+
+/* Buttons Styling */
+button {
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Styling for 'Upload Product' Button */
+.left a button {
+    background-color: black;
+    color: white;
+}
+
+.left a button:hover {
+    background-color: black;
+}
+
+/* Styling for 'Logout' Button */
+.left a:last-child button {
+    background-color: black;
+    color: white;
+}
+
+.left a:last-child button:hover {
+    background-color: black;
+}
+
+/* Right-side search and social media icons */
+.right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.right input[type="search"] {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 200px;
+}
+
+.right i {
+    font-size: 1.5rem;
+    color: #555;
+    cursor: pointer;
+}
+
+
+/* Gallery grid layout */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.gallery-grid div {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Image titles styling */
+.gallery-grid span {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Styling for spacing and layout of titles */
+.gallery-grid span:first-child {
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Ensure that images and text stay centered and responsive */
+.gallery-grid img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Styling for the logout and other links */
+a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    padding: 10px 20px;
+    display: inline-block;
+    margin: 20px 0;
+}
+
+a:hover {
+    color: #0056b3;
+}

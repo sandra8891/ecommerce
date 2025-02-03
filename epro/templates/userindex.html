@@ -5,30 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/userindex.css' %}">
 </head>
 <body class="rr">
+    <div class="topnav">
+        <p>SIGN UP FOR 15% OFF</p>
+    </div>
+
+    <div class="nav">
+        <div class="logo">
+            <img  src="{% static 'image/crocslogo.svg' %}" alt="crocs">
+        </div>
+        <div class="left">
+            <div>SHOP NOW</div>
+            <div>REVIEWS</div>
+            <div>ABOUT US</div>
+            <div>CONTACT US</div>
+            
+            <a href="{% url 'sellerlogout' %}"><button>Logout</button></a>
+        </div>
+        <div class="right">
+            <div><input type="search" placeholder="Product Code"></div>
+            <div><i class="bi bi-search"></i></div>
+            <div><i class="bi bi-facebook"></i></div>
+        </div>
+    </div> 
 <div>
-    <div>
-        {% for i in feeds %}
+    <div class="gallery-grid">
+        {% for i in gallery_images %}
             <div>
-                {% if i.feedimage %}
-                    <img src="{{ i.feedimage.url }}" alt="Gallery Image" width="300">
-                {% else %}
-                    <p>No image available</p>
-                {% endif %}
+                <img src="{{ i.feedimage.url }}" alt="Gallery Image" width="300">
+                <span>{{ i.title1 }}</span>
+                <span>{{ i.title2 }}</span>
+                <span>{{ i.title3 }}</span>
             </div>
         {% endfor %}
     </div>
     
-{% for i in feeds %}
+ </div>       
 
-<span>{{ i.title1 }}</span>
-<span>{{ i.title2 }}</span>
-<span>{{ i.title3 }}</span>
-{% endfor %}
-</div>
-<a href="{% url 'logout' %}">logout</a>
 </body>
 </html>
     <!-- Display images if there are any -->
