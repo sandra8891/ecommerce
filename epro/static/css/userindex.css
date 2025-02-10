@@ -130,7 +130,7 @@ button:hover {
 /* Optional: Add a background image */
 .background-section {
     background-color: #f0f0f0;  /* Light grey background as a fallback */
-    background-image: url("{% static 'image/crocsbg.jpg' %}"); /* Background image */
+    background-image: url("{% static 'image/newbg.jpg' %}"); /* Background image */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
