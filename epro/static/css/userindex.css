@@ -17,7 +17,7 @@ body {
     text-align: center;
     padding: 10px 0;
     font-size: 1.2rem;
-    color: #333;
+    color:white;
     border-bottom: 1px solid #000;
 }
 
@@ -43,21 +43,23 @@ body {
 
 /* Logo Styling */
 .logo img {
-    width: 120px;
+    width: 190px;
     height: auto;
+    margin-left: 23px;
+
 }
 
 /* Left-side navigation links */
 .left {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     align-items: center;
 }
 
 .left div {
     font-size: 1rem;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 5px 19px;
 }
 
 .left a {
@@ -101,45 +103,48 @@ button:hover {
 .right {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 26px;
 }
-
+/* 
 .right input[type="search"] {
     padding: 8px 12px;
     border-radius: 5px;
     border: 1px solid #ddd;
     width: 200px;
-}
+} */
 
 .right i {
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     color: #555;
     cursor: pointer;
+    margin-right: 26px;
 }
 
-.background-section {
-    background-color: #f0f0f0;  /* Light grey background, or you can use an image */
-    padding: 50px 0;  /* Add padding for spacing */
-    color: black;  /* Text color */
-    text-align: center; /* Center the text */
-}
+/* .background-section { */
+    /* background-color: #f0f0f0;  Light grey background, or you can use an image */
+    /* padding: 50px 0;  Add padding for spacing */
+    /* color: black;  Text color */
+    /* text-align: center; Center the text */
+/* } */
 
 /* Optional: Add a background image */
 .background-section {
-    background-image: url("{% static 'image/crocsbg.jpg' %}"); /* Replace with your background image */
+    background-color: #f0f0f0;  /* Light grey background as a fallback */
+    background-image: url("{% static 'image/crocsbg.jpg' %}"); /* Background image */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 100px 0;  /* Add padding for spacing */
+    padding: 260px 0;  /* Add padding for spacing */
     color: white;  /* Text color */
- 
+    text-align: center; /* Center the text */
 }
 
 .background-section p {
     font-size: 2rem;
     font-weight: bold;
-    color:black; /* Adjust the text color if using a dark background */
+    color: black; /* Adjust the text color if using a dark background */
 }
+
 
 /* Gallery grid layout */
 .gallery-grid {
@@ -147,6 +152,7 @@ button:hover {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     padding: 20px;
+
 }
 
 .gallery-grid div {
@@ -200,4 +206,38 @@ a {
 
 a:hover {
     color: #0056b3;
+}
+
+
+.footer{
+    background-color: black;
+    display: flex;
+    height:350px;
+
+}
+.footer h4{
+    margin-bottom: 40px;
+    font-size: 16px;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.footer li{
+    list-style: none;
+    margin: 15px;
+    color: rgb(175, 175, 175);
+}
+.footer div{
+    font-size: 15px;
+    font-weight: 500px;
+    /*margin-left: 200px;*/
+    margin-top: 50px;
+}
+.footlogo{
+    margin-left: 200px;
+    margin-top: 50px;
+    margin-right: 60px;
+}
+.foot2{
+    margin-left: 160px;
+    
 }
