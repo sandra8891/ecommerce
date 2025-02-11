@@ -134,17 +134,35 @@ button:hover {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 260px 0;  /* Add padding for spacing */
+    padding: 380px 0;  /* Add padding for spacing */
     color: white;  /* Text color */
     text-align: center; /* Center the text */
+    margin-bottom: 10px;
 }
 
-.background-section p {
+/* .background-section p {
     font-size: 2rem;
     font-weight: bold;
     color: black; /* Adjust the text color if using a dark background */
+/* } */
+
+.background-section2 {
+    background-color: #f0f0f0;  /* Light grey background as a fallback */
+    background-image: url("{% static 'image/newbg.jpg' %}"); /* Background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 340px 0;  /* Add padding for spacing */
+    color: white;  /* Text color */
+    text-align: center; /* Center the text */
+    margin-top: 10px;
 }
 
+/* .background-section p {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black; /* Adjust the text color if using a dark background */
+/* } */ 
 
 /* Gallery grid layout */
 .gallery-grid {
@@ -241,3 +259,5 @@ a:hover {
     margin-left: 160px;
     
 }
+
+

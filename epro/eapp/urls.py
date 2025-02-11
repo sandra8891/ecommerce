@@ -19,6 +19,7 @@ urlpatterns = [
     path('sellerindex',views.index,name='index'),
     path('deletion/<int:id>/', views.delete_g, name='deletion'),
     path('edit/<int:pk>/', views.edit_g, name='edit_g'),
+    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
