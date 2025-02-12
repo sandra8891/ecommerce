@@ -12,15 +12,28 @@ body {
 
 /* Top Navigation */
 .topnav {
-    /* background-color: #f8f8f8; */
     background-color: black;
-    text-align: center;
-    padding: 10px 0;
+    padding: 10px 20px; /* Add padding to the sides for spacing */
     font-size: 1.2rem;
-    color:white;
+    color: white;
     border-bottom: 1px solid #000;
-}
-
+    display: flex;
+    justify-content: space-between; /* Space between items */
+    align-items: center;
+  }
+  
+  .topnav .sign-up-text {
+    text-align: center;
+    flex-grow: 1; /* This ensures the sign-up text takes up remaining space */
+  }
+  
+  /* Account Dropdown container */
+  .topnav .account-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px; /* Adds space from the right edge */
+  }
+  
 /* Main Navigation Bar */
 .nav {
     display: flex;
@@ -66,38 +79,6 @@ body {
     text-decoration: none;
 }
 
-/* Buttons Styling */
-button {
-    padding: 8px 16px;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-/* Styling for 'Upload Product' Button */
-.left a button {
-    background-color: black;
-    color: white;
-}
-
-.left a button:hover {
-    background-color: black;
-}
-
-/* Styling for 'Logout' Button */
-.left a:last-child button {
-    background-color: black;
-    color: white;
-}
-
-.left a:last-child button:hover {
-    background-color: black;
-}
 
 /* Right-side search and social media icons */
 .right {
@@ -105,13 +86,7 @@ button:hover {
     align-items: center;
     gap: 26px;
 }
-/* 
-.right input[type="search"] {
-    padding: 8px 12px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    width: 200px;
-} */
+
 
 .right i {
     font-size: 1.9rem;
@@ -120,12 +95,6 @@ button:hover {
     margin-right: 26px;
 }
 
-/* .background-section { */
-    /* background-color: #f0f0f0;  Light grey background, or you can use an image */
-    /* padding: 50px 0;  Add padding for spacing */
-    /* color: black;  Text color */
-    /* text-align: center; Center the text */
-/* } */
 
 /* Optional: Add a background image */
 .background-section {
@@ -140,11 +109,7 @@ button:hover {
     margin-bottom: 10px;
 }
 
-/* .background-section p {
-    font-size: 2rem;
-    font-weight: bold;
-    color: black; /* Adjust the text color if using a dark background */
-/* } */
+
 
 .background-section2 {
     background-color: #f0f0f0;  /* Light grey background as a fallback */
@@ -158,11 +123,7 @@ button:hover {
     margin-top: 10px;
 }
 
-/* .background-section p {
-    font-size: 2rem;
-    font-weight: bold;
-    color: black; /* Adjust the text color if using a dark background */
-/* } */ 
+
 
 /* Gallery grid layout */
 .gallery-grid {
@@ -260,4 +221,63 @@ a:hover {
     
 }
 
-
+/* Dropdown Container */
+.account-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* The Trigger Button */
+.account-button {
+    background: none;
+    border: groove;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  /* The Dropdown Menu (initially hidden) */
+  .account-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    min-width: 189px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    max-height: 300px; /* Max height */
+    overflow-y: auto; /* Scroll if the content is too long */
+  }
+  
+  /* Show the menu on hover */
+  .account-dropdown:hover .account-menu {
+    display: block;
+  }
+  
+  /* Dropdown Links */
+  .account-menu a {
+    display: block;
+    padding: 8px 15px; /* Reduced padding to decrease gap */
+    color: black;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and color */
+    border-bottom: 1px solid #333; /* Permanent underline */
+  }
+  
+  /* Hover effect for links */
+  .account-menu a:hover {
+    background-color: #f1f1f1;
+    color: #666; /* Change text color to a lighter shade */
+  }
+  
+  
+  
+  
+   

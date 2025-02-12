@@ -99,28 +99,34 @@ def usersignup(request):
 
 def loginuser(request):
     if 'username' in request.session:
-        return redirect('firstpage')  
+        return redirect('firstpage')  # Redirect if already logged in
     
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        
+        # Authenticate user
         user = authenticate(username=username, password=password)
         
         if user is not None:
             login(request, user)
-            request.session['username'] = username
-            return redirect('firstpage')  
+            request.session['username'] = username  # Store session
+            return redirect('firstpage')  # Redirect to the first page after login
         else:
             messages.error(request, "Invalid credentials.")
-            
-    return render(request, 'login.html')
+    
+    return render(request, 'login.html')  # If GET request, show login form
+
 
 def firstpage(request):
-    gallery_images = Gallery.objects.all()
+    if not request.user.is_authenticated:
+        return redirect('loginuser')  # Redirect if not logged in
+    
+    gallery_images = Gallery.objects.all()  # Fetch all gallery images
     return render(request, "userindex.html", {
-        "gallery_images": gallery_images, 
-        "feeds": gallery_images  # Use the same queryset instead of querying twice
+        "gallery_images": gallery_images
     })
+
 
 def verifyotp(request):
     if request.POST:
@@ -254,9 +260,10 @@ def edit_g(request, pk):
 
 
 def logoutuser(request):
-    logout(request)
-    request.session.flush()
-    return redirect('loginuser')
+    logout(request)  # Django's built-in logout function
+    request.session.flush()  # Clear the session
+    return redirect('loginuser')  # Redirect to login page after logout
+
 
 def logoutseller(request):
     logout(request)
