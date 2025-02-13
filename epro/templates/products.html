@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Display</title>
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="{% static 'image/logo.png' %}" alt="Logo" />
+        </div>
+        <!-- <div class="search-bar">
+            <input type="text" placeholder="Search for products..." />
+            <button>Search</button>
+        </div> -->
+    </header>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail">
+        {% for i in gallery_images %}
+        <div class="product-container">
+            <!-- Product Image -->
+            <div class="product-image">
+                <img src="{{ i.feedimage.url }}" alt="Product Image">
+            </div>
+
+            <!-- Product Details -->
+            <div class="product-details">
+                <h1>{{ i.title1 }}</h1>
+                <p>{{ i.title2 }}</p>
+                <div class="product-price">
+                    <span class="price">{{ i.title3 }}</span>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Your Store. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

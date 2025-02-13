@@ -1,0 +1,134 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background-color: #2874f0;
+    color: white;
+}
+
+header .logo img {
+    width: 150px;
+}
+
+header .search-bar {
+    flex-grow: 1;
+    display: flex;
+}
+
+header .search-bar input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 80%;
+}
+
+header .search-bar button {
+    padding: 10px;
+    background-color: #ff5722;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Product Gallery Section */
+.product-gallery {
+    padding: 30px;
+    text-align: center;
+}
+
+.product-gallery h1 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: #2874f0;
+}
+
+/* Product Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-details {
+    padding: 15px;
+}
+
+.product-details h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.product-details p {
+    font-size: 1em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #ff5722;
+    margin-bottom: 15px;
+}
+
+.add-to-cart {
+    padding: 10px;
+    background-color: #2874f0;
+    border: none;
+    color: white;
+    font-size: 1em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #ff5722;
+}
+
+/* Footer Section */
+footer {
+    background-color: #2874f0;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}

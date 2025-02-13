@@ -98,19 +98,18 @@ def usersignup(request):
     return render(request, "signup.html")
 
 def loginuser(request):
-    if 'username' in request.session:
+    if request.user.is_authenticated:
         return redirect('firstpage')  # Redirect if already logged in
     
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         
-        # Authenticate user
         user = authenticate(username=username, password=password)
         
         if user is not None:
             login(request, user)
-            request.session['username'] = username  # Store session
+            request.session['username'] = username
             return redirect('firstpage')  # Redirect to the first page after login
         else:
             messages.error(request, "Invalid credentials.")
@@ -118,14 +117,15 @@ def loginuser(request):
     return render(request, 'login.html')  # If GET request, show login form
 
 
+
 def firstpage(request):
-    if not request.user.is_authenticated:
-        return redirect('loginuser')  # Redirect if not logged in
+ 
     
     gallery_images = Gallery.objects.all()  # Fetch all gallery images
     return render(request, "userindex.html", {
         "gallery_images": gallery_images
     })
+
 
 
 def verifyotp(request):
@@ -257,6 +257,10 @@ def edit_g(request, pk):
         # If the request method is GET, pre-fill the form with the current data
         return render(request, 'edit_gallery.html', {'data': gallery_item})
 
+def products(request,id):
+    # data = Gallery.objects.all()
+    gallery_images =Gallery.objects.filter(pk=id)
+    return render(request,'products.html',{"gallery_images": gallery_images})
 
 
 def logoutuser(request):
