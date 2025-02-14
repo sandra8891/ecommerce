@@ -123,17 +123,33 @@ body {
     margin-top: 10px;
 }
 
+/* .new-arrivals-container { */
+    /* display: flex; */
+    /* justify-content: center; Centers the content horizontally */
+    /* align-items: center; Centers the content vertically */
+    /* height: 200px; Adjust this height based on your needs */
+    /* background-color: #f8f8f8; Optional: Background color */
+/* } */
+
+/* .new-arrivals-container h1 { */
+    /* font-size: 2rem; Adjust the font size as needed */
+    /* font-weight: bold; Make the text bold */
+    /* text-align: center; Ensures the text is centered within the container */
+/* } */
+
+
+
 
 
 /* Gallery grid layout */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Creates a responsive grid */
     gap: 20px;
     padding: 20px;
-
 }
 
+/* Each individual image box */
 .gallery-grid div {
     background-color: white;
     border: 1px solid #ddd;
@@ -143,14 +159,15 @@ body {
     text-align: center;
 }
 
+/* Style for the images to maintain a fixed height and width */
 .gallery-grid img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+    width: 100%;  /* Ensure the image takes up the full width of the container */
+    height: 300px; /* Fixed height for all images */
+    object-fit: cover; /* Ensures the image covers the area while maintaining aspect ratio */
     border-radius: 5px;
 }
 
-/* Image titles styling */
+/* Styling for image titles */
 .gallery-grid span {
     display: block;
     margin-top: 10px;
@@ -159,7 +176,7 @@ body {
     font-weight: bold;
 }
 
-/* Styling for spacing and layout of titles */
+/* Styling for the first image title (if any) */
 .gallery-grid span:first-child {
     font-size: 18px;
     margin-top: 15px;

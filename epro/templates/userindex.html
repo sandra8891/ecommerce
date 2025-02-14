@@ -28,10 +28,7 @@
     </div>
     
     </div>
-  </body>
   
-    
-
     <div class="nav">
         <div class="logo">
             <img  src="{% static 'image/crocslogo.svg' %}" alt="crocs">
@@ -65,15 +62,15 @@
     <div>
         <h1>NEW ARRIVALS</h1>
     </div>
-    
     <div class="gallery-grid">
         {% for i in gallery_images %}
             <div>
                 <a href="{% url 'products' i.id %}">
-                <img src="{{ i.feedimage.url }}" alt="Gallery Image" width="300">
-                <span>{{ i.title1 }}</span>
-                <span>{{ i.title2 }}</span>
-                <span>{{ i.title3 }}</span>
+                <img src="{{ i.feedimage.url }}" alt="Gallery Image" width="300"><br>
+                <span>{{ i.title1 }}</span><br>
+                <span>{{ i.title2 }}</span><br>
+                <span>{{ i.title3 }}</span><br>
+                <button class="add-to-cart">Add to Cart</button>
             </div></a>
         {% endfor %}
     </div>
