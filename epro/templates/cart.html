@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CART</title>
+</head>
+<body>
+<!-- cart.html -->
+<h2>Your Cart</h2>
+<div class="cart-items">
+    {% for item in cart_items %}
+        <div class="cart-item">
+            <img src="{{ item.gallery_item.feedimage.url }}" alt="{{ item.gallery_item.title1 }}">
+            <div class="product-item">
+                <div class="product-details">
+                    <p class="product-title">{{ i.title1 }}</p><br>
+                    <p class="product-description">{{ i.title2 }}</p><br>
+                    <p class="product-price">{{ i.title3 }}</p><br>
+
+                    <!-- Shoe Size Selection Dropdown -->
+                    <label for="size">Select Shoe Size:</label><br>
+                    <select id="size">
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select><br>
+
+                    
+                    <p><strong>Height:</strong> 1.9 inches (4.7 cm)</p><br><br>
+                </div>
+                <!-- <div class="product-image">
+                        <img src="{{ i.feedimage.url }}" alt="Gallery Image">
+                </div>
+            </div> -->
+                <a href="{% url 'remove_from_cart' item.id %}">Remove</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+</body>
+</html>

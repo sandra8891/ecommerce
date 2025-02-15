@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 import random
 from datetime import datetime, timedelta
+from django.contrib.auth.decorators import login_required
 from .models import *
 
 
@@ -119,11 +120,11 @@ def loginuser(request):
 
 
 def firstpage(request):
- 
-    
     gallery_images = Gallery.objects.all()  # Fetch all gallery images
+    cart_item_count = Cart.objects.filter(user=request.user).count() if request.user.is_authenticated else 0
     return render(request, "userindex.html", {
-        "gallery_images": gallery_images
+        "gallery_images": gallery_images,
+        "cart_item_count": cart_item_count
     })
 
 
@@ -261,6 +262,46 @@ def products(request,id):
     # data = Gallery.objects.all()
     gallery_images =Gallery.objects.filter(pk=id)
     return render(request,'products.html',{"gallery_images": gallery_images})
+
+
+
+@login_required
+def add_to_cart(request, id):
+    # Get the gallery item by ID
+    gallery_item = Gallery.objects.get(id=id)
+
+    # Check if the item already exists in the user's cart
+    cart_item, created = Cart.objects.get_or_create(user=request.user, gallery_item=gallery_item)
+
+    if not created:
+        # If the item is already in the cart, just increase the quantity
+        cart_item.quantity += 1
+        cart_item.save()
+
+    messages.success(request, f"{gallery_item.title1} has been added to your cart!")
+    return redirect('firstpage')  # Redirect to a cart or continue shopping page
+
+
+@login_required
+def view_cart(request):
+    # Get all cart items for the logged-in user
+    cart_items = Cart.objects.filter(user=request.user)
+    # total_price = sum(item.total_price() for item in cart_items)
+
+    return render(request, 'cart.html', {'cart_items': cart_items})
+
+
+@login_required
+def remove_from_cart(request, cart_id):
+    try:
+        cart_item = Cart.objects.get(id=cart_id, user=request.user)
+        cart_item.delete()
+        messages.success(request, "Item removed from your cart.")
+    except Cart.DoesNotExist:
+        messages.error(request, "Item not found in your cart.")
+
+    return redirect('view_cart')  # Redirect to the cart page
+
 
 
 def logoutuser(request):

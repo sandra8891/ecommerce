@@ -45,7 +45,14 @@
         <div class="right">
             <div><i class="bi bi-search"></i></div>
             <div><i class="bi bi-heart"></i></div>
-            <div><i class="bi bi-cart-fill"></i></div>
+            <!-- Add this to your navigation bar -->
+             <div class="cart-icon">
+                <a href="{% url 'view_cart' %}">
+                <i class="bi bi-cart-fill"></i>
+                <span>{{ cart_item_count }}</span>  <!-- Display number of items in cart -->
+                </a>
+            </div>
+
         </div>
     </div> 
     <div class="belownav">
@@ -74,7 +81,7 @@
                     <!-- <p><strong>Price:</strong> {{ i.title2 }}</p><br> -->
                     <p><strong>Height:</strong> 1.9 inches (4.7 cm)</p><br><br>
 
-                    <button class="add-to-cart">Add to Cart</button>
+                    <a href="{% url 'add_to_cart' i.id %}"><button class="add-to-cart">Add to Cart</button></a>
                 </div>
                 <div class="product-image">
                     <a href="{% url 'products' i.id %}">

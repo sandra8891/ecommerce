@@ -19,7 +19,10 @@ urlpatterns = [
     path('sellerindex',views.index,name='index'),
     path('deletion/<int:id>/', views.delete_g, name='deletion'),
     path('edit/<int:pk>/', views.edit_g, name='edit_g'),
-    path('products/<int:id>',views.products,name='products')
+    path('products/<int:id>',views.products,name='products'),
+    path('add-to-cart/<int:id>/', views.add_to_cart, name='add_to_cart'),
+    path('view-cart/', views.view_cart, name='view_cart'),
+    path('remove-from-cart/<int:cart_id>/', views.remove_from_cart, name='remove_from_cart'),
     
 ]
 if settings.DEBUG:
