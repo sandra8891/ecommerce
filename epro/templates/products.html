@@ -10,7 +10,6 @@
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
     <div class="topnav">
         <p class="sign-up-text">SIGN UP FOR 15% OFF</p>
         <div class="account-dropdown">
@@ -40,18 +39,17 @@
             <div>NEW ARRIVALS</div>
             <div>SALE</div>
             
-            <!-- <a href="{% url 'logoutuser' %}"><button>Logout</button></a> -->
+            
         </div>
         <div class="right">
             <div><i class="bi bi-search"></i></div>
             <div><i class="bi bi-heart"></i></div>
-            <!-- Add this to your navigation bar -->
-             <div class="cart-icon">
-                <a href="{% url 'view_cart' %}">
+        
+          <div class="cart-icon">
                 <i class="bi bi-cart-fill"></i>
-                <span>{{ cart_item_count }}</span>  <!-- Display number of items in cart -->
-                </a>
+                <span>{{ cart_item_count }}</span> <!-- Display the cart item count -->
             </div>
+            
 
         </div>
     </div> 
@@ -59,7 +57,7 @@
         <p>SIGN UP FOR 15% OFF</p>
     </div>
 
-    <!-- Product Gallery Grid -->
+    
     <div class="gallery-grid">
         {% for i in gallery_images %}
             <div class="product-item">
@@ -68,7 +66,7 @@
                     <p class="product-description">{{ i.title2 }}</p><br>
                     <p class="product-price">{{ i.title3 }}</p><br>
 
-                    <!-- Shoe Size Selection Dropdown -->
+                    
                     <label for="size">Select Shoe Size:</label><br>
                     <select id="size">
                         <option value="5">5</option>
@@ -78,15 +76,18 @@
                         <option value="9">9</option>
                     </select><br>
 
-                    <!-- <p><strong>Price:</strong> {{ i.title2 }}</p><br> -->
+                    
                     <p><strong>Height:</strong> 1.9 inches (4.7 cm)</p><br><br>
 
-                    <a href="{% url 'add_to_cart' i.id %}"><button class="add-to-cart">Add to Cart</button></a>
+                    <a href="{% url 'addtocart' i.id %}">
+                        <button class="add-to-cart">Add to Cart</button>
+                    </a>
+                    
                 </div>
                 <div class="product-image">
-                    <a href="{% url 'products' i.id %}">
+                    <!-- <a href="{% url 'products' i.id %}"> -->
                         <img src="{{ i.feedimage.url }}" alt="Gallery Image">
-                    </a>
+                    <!-- </a> -->
                 </div>
             </div>
         {% endfor %}

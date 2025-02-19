@@ -34,24 +34,19 @@
             <img  src="{% static 'image/crocslogo.svg' %}" alt="crocs">
         </div>
         <div class="left">
-            <div>WOMEN</div>
-            <div>MEN</div>
-            <div>BESTSELLERS</div>
-            <div>NEW ARRIVALS</div>
-            <div>SALE</div>
-            
-            <!-- <a href="{% url 'logoutuser' %}"><button>Logout</button></a> -->
+            <a href="#"><div>WOMEN</div></a>
+            <a href="#"><div>MEN</div></a>
+            <a href="#"><div>BESTSELLERS</div></a>
+            <a href="#"><div>NEW ARRIVALS</div></a>
+            <a href="{% url 'about_us' %}"><div>ABOUT US</div></a>
         </div>
         <div class="right">
             <div><i class="bi bi-search"></i></div>
             <div><i class="bi bi-heart"></i></div>
-            <!-- Add this to your navigation bar -->
-        <div class="cart-icon">
-            <a href="{% url 'view_cart' %}">
-            <i class="bi bi-cart-fill"></i>
-            <span>{{ cart_item_count }}</span>  <!-- Display number of items in cart -->
-            </a>
-        </div>
+            <div class="cart-icon">
+                <i class="bi bi-cart-fill"></i>
+                <span>{{ cart_item_count }}</span> <!-- Display the cart item count -->
+            </div>
 
         </div>
     </div> 
@@ -59,7 +54,7 @@
         <p>SIGN UP FOR 15% OFF</p>
     </div>
     <div class="background-section" style="background-image: url('{% static 'image/bg2.jpg' %}');">
-        <!-- Your content here -->
+    
     </div>
     
     <div class="background-section2" style="background-image: url('{% static 'image/bg3.jpg' %}');">
@@ -76,8 +71,11 @@
                 <img src="{{ i.feedimage.url }}" alt="Gallery Image" width="300"><br>
                 <span>{{ i.title1 }}</span><br>
                 <span>{{ i.title2 }}</span><br>
-                <span>{{ i.title3 }}</span><br>
-                <a href="{% url 'add_to_cart' i.id %}"><button class="add-to-cart">Add to Cart</button></a>
+                <span>{{ i.title3 }}</span>
+                <a href="{% url 'addtocart' i.id %}">
+                    <button class="add-to-cart">Add to Cart</button>
+                </a>
+                
             </div></a>
         {% endfor %}
     </div>
@@ -88,7 +86,7 @@
         <ul>
             <li><img src="image/logo (1).png" alt=""></li>
             <li><i class="bi bi-facebook"></i></li>
-            <li>All rights are reseved by chempakam,cochin,india</li>
+            <li>All rights are reseved by Crocs,cochin,india</li>
         </ul>
         </div>
         <div class="foot1">

@@ -20,9 +20,12 @@ urlpatterns = [
     path('deletion/<int:id>/', views.delete_g, name='deletion'),
     path('edit/<int:pk>/', views.edit_g, name='edit_g'),
     path('products/<int:id>',views.products,name='products'),
-    path('add-to-cart/<int:id>/', views.add_to_cart, name='add_to_cart'),
-    path('view-cart/', views.view_cart, name='view_cart'),
-    path('remove-from-cart/<int:cart_id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('addtocart/<int:id>/', views.addtocart, name='addtocart'),
+    path('cview/', views.cview, name='cview'),
+    path('about_us/',views.about_us,name='about_us'),
+    path('home',views.home,name='home')
+
+   
     
 ]
 if settings.DEBUG:

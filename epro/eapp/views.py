@@ -10,20 +10,18 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 
 
-# Create your views here.
+
 def gallery(request):
-    if request.method == 'POST' and 'image' in request.FILES:  # Ensure the 'image' key is in request.FILES
-        myimage = request.FILES['image']  # Access the uploaded image from request.FILES
-        # Create an instance of Gallery and save the image  # Save the object to the database
-        # return redirect('index')  # Redirect back to the index page after saving
+    if request.method == 'POST' and 'image' in request.FILES: 
+        myimage = request.FILES['image']  
         todo123=request.POST.get("todo")
         todo321=request.POST.get("date")
         todo311=request.POST.get("course")  
         obj=Gallery(title1=todo123,title2=todo321,title3=todo311,feedimage=myimage,user=request.user)
         obj.save()
         data=Gallery.objects.all()
-        return redirect('index')  # Assuming 'index' is the name of the URL pattern.
-        # Retrieve all gallery images to display
+        return redirect('index')
+    
     gallery_images = Gallery.objects.all()
     return render(request, "galleryupload.html")
 
@@ -34,7 +32,7 @@ def sellersignup(request):
         password = request.POST.get('password')
         confirmpassword = request.POST.get('confpassword')
 
-        # Validate form fields
+        
         if not username or not email or not password or not confirmpassword:
             messages.error(request, 'All fields are required.')
         elif confirmpassword != password:
@@ -44,12 +42,12 @@ def sellersignup(request):
         elif User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists.")
         else:
-            # Create the user
+        
             user = User.objects.create_user(username=username, email=email, password=password)
             user.is_staff = True
             user.save()
             messages.success(request, "Account created successfully!")
-            return redirect('sellerlogin')  # Redirect to login page
+            return redirect('sellerlogin')  
 
     return render(request, "register.html")
 
@@ -67,7 +65,7 @@ def sellerlogin(request):
             request.session['username'] = username
             if user.is_staff:
                 return redirect('index')
-            return redirect('firstpage')  # Redirect to the home page
+            return redirect('firstpage')  
         else:
             messages.error(request, "Invalid credentials.")
 
@@ -80,7 +78,7 @@ def usersignup(request):
         password = request.POST.get('password')
         confirmpassword = request.POST.get('confpassword')
 
-        # Validate form fields
+        
         if not username or not email or not password or not confirmpassword:
             messages.error(request, 'All fields are required.')
         elif confirmpassword != password:
@@ -90,7 +88,7 @@ def usersignup(request):
         elif User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists.")
         else:
-            # Create the user
+        
             user = User.objects.create_user(username=username, email=email, password=password)
             user.save()
             messages.success(request, "Account created successfully!")
@@ -100,7 +98,7 @@ def usersignup(request):
 
 def loginuser(request):
     if request.user.is_authenticated:
-        return redirect('firstpage')  # Redirect if already logged in
+        return redirect('firstpage')
     
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -111,20 +109,18 @@ def loginuser(request):
         if user is not None:
             login(request, user)
             request.session['username'] = username
-            return redirect('firstpage')  # Redirect to the first page after login
+            return redirect('firstpage')
         else:
             messages.error(request, "Invalid credentials.")
     
-    return render(request, 'login.html')  # If GET request, show login form
+    return render(request, 'login.html')
 
 
 
 def firstpage(request):
-    gallery_images = Gallery.objects.all()  # Fetch all gallery images
-    cart_item_count = Cart.objects.filter(user=request.user).count() if request.user.is_authenticated else 0
+    gallery_images = Gallery.objects.all()  
     return render(request, "userindex.html", {
         "gallery_images": gallery_images,
-        "cart_item_count": cart_item_count
     })
 
 
@@ -135,15 +131,15 @@ def verifyotp(request):
         otp1 = request.session.get('otp')
         otp_time_str = request.session.get('otp_time') 
 
-        # Check if OTP is expired
+    
         if otp_time_str:
-            otp_time = datetime.fromisoformat(otp_time_str)  # Convert the string back to a datetime object
-            otp_expiry_time = otp_time + timedelta(minutes=5)  # OTP expires after 5 minutes
+            otp_time = datetime.fromisoformat(otp_time_str)
+            otp_expiry_time = otp_time + timedelta(minutes=5)
             if datetime.now() > otp_expiry_time:
                 messages.error(request, 'OTP has expired. Please request a new one.')
                 del request.session['otp']
                 del request.session['otp_time']
-                return redirect('verifyotp')  # Redirect to request a new OTP
+                return redirect('verifyotp')
 
         if otp == otp1:
             del request.session['otp']
@@ -152,10 +148,10 @@ def verifyotp(request):
         else:
             messages.error(request, 'Invalid OTP. Please try again.')
 
-    # Generate OTP and send email
+    
     otp = ''.join(random.choices('123456789', k=6))
     request.session['otp'] = otp
-    request.session['otp_time'] = datetime.now().isoformat()  # Store the current time as an ISO string
+    request.session['otp_time'] = datetime.now().isoformat()
     message = f'Your email verification code is: {otp}'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [request.session.get('email')]
@@ -186,7 +182,7 @@ def passwordreset(request):
         password = request.POST.get('password')
         confirmpassword = request.POST.get('confpassword')
 
-        # Check if the passwords match
+    
         if confirmpassword != password:
             messages.error(request, "Passwords do not match.")
         else:
@@ -194,23 +190,20 @@ def passwordreset(request):
             try:
                 user = User.objects.get(email=email)
 
-                # Set the new password
                 user.set_password(password)
                 user.save()
 
-                # After resetting password, clear the session email
                 del request.session['email']
                 messages.success(request, "Your password has been reset successfully.")
                 
-                # Optionally, log the user in automatically after resetting the password
                 user = authenticate(username=user.username, password=password)
                 if user is not None:
                     login(request, user)
 
-                return redirect('loginuser')  # Redirect to the login page after password reset
+                return redirect('loginuser')
             except User.DoesNotExist:
                 messages.error(request, "No user found with that email address.")
-                return redirect('getusername')  # Redirect to username input form
+                return redirect('getusername')
 
     return render(request, "passwordreset.html")
 
@@ -225,89 +218,81 @@ def delete_g(request,id):
     return redirect('index')
 
 def edit_g(request, pk):
-    # Check if the gallery item exists
     gallery_item = Gallery.objects.filter(pk=pk).first()
 
     if not gallery_item:
-        # If the gallery item is not found, show an error message and redirect to the index page
         messages.error(request, "Gallery item not found.")
         return redirect('index')
 
     if request.method == "POST":
-        # Get the updated values from the form submission
         edit1 = request.POST.get('todo')
         edit2 = request.POST.get('date')
         edit3 = request.POST.get('course')
 
-        # Update the gallery item fields
+
         gallery_item.title1 = edit1
         gallery_item.title2 = edit2
         gallery_item.title3 = edit3
 
-        # If an image is uploaded, update the image as well
         if 'image' in request.FILES:
             gallery_item.feedimage = request.FILES['image']
 
-        # Save the updated object to the database
         gallery_item.save()
 
         messages.success(request, "Gallery item updated successfully.")
-        return redirect('index')  # Redirect to the gallery index page after editing
+        return redirect('index')
 
     else:
-        # If the request method is GET, pre-fill the form with the current data
         return render(request, 'edit_gallery.html', {'data': gallery_item})
 
 def products(request,id):
-    # data = Gallery.objects.all()
     gallery_images =Gallery.objects.filter(pk=id)
     return render(request,'products.html',{"gallery_images": gallery_images})
 
+def cview(request):
+    if request.user.is_authenticated:
+        citems = Cart.objects.filter(user=request.user)
+        cart_item_count = citems.count()  # Get the count of items in the cart
+        return render(request, 'cart.html', {"citems": citems, "cart_item_count": cart_item_count})
+    else:
+        return redirect('loginuser')
 
 
-@login_required
-def add_to_cart(request, id):
-    # Get the gallery item by ID
-    gallery_item = Gallery.objects.get(id=id)
-
-    # Check if the item already exists in the user's cart
-    cart_item, created = Cart.objects.get_or_create(user=request.user, gallery_item=gallery_item)
-
-    if not created:
-        # If the item is already in the cart, just increase the quantity
-        cart_item.quantity += 1
-        cart_item.save()
-
-    messages.success(request, f"{gallery_item.title1} has been added to your cart!")
-    return redirect('firstpage')  # Redirect to a cart or continue shopping page
-
-
-@login_required
-def view_cart(request):
-    # Get all cart items for the logged-in user
-    cart_items = Cart.objects.filter(user=request.user)
-    # total_price = sum(item.total_price() for item in cart_items)
-
-    return render(request, 'cart.html', {'cart_items': cart_items})
+def addtocart(request, id):
+    if request.user.is_authenticated:
+        product = Gallery.objects.get(id=id)
+        citems, created = Cart.objects.get_or_create(
+            user=request.user,
+            product=product
+        )
+        
+        if created:
+            print(f"Cart Item Added: {product.title1}")
+        else:
+            print(f"Cart Item already in cart: {product.title1}")
+        
+        return redirect('cview')  # Redirect to view the cart
+    else:
+        return redirect('loginuser') 
 
 
-@login_required
-def remove_from_cart(request, cart_id):
-    try:
-        cart_item = Cart.objects.get(id=cart_id, user=request.user)
-        cart_item.delete()
-        messages.success(request, "Item removed from your cart.")
-    except Cart.DoesNotExist:
-        messages.error(request, "Item not found in your cart.")
 
-    return redirect('view_cart')  # Redirect to the cart page
+
+def about_us(request):
+    return render(request,'aboutus.html')
+def home(request):
+    return render(request,'userindex.html')
+
+
+
+
 
 
 
 def logoutuser(request):
-    logout(request)  # Django's built-in logout function
-    request.session.flush()  # Clear the session
-    return redirect('loginuser')  # Redirect to login page after logout
+    logout(request) 
+    request.session.flush() 
+    return redirect('loginuser') 
 
 
 def logoutseller(request):

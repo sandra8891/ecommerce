@@ -10,12 +10,6 @@ class Gallery(models.Model):
     
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    gallery_item = models.ForeignKey(Gallery, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
+    product=models.ForeignKey(Gallery, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f"{self.user.username} - {self.gallery_item.title1} x {self.quantity}"
-
-    def total_price(self):
-        return self.gallery_item.price * self.quantity  # Assuming each product has a 'price' field  
 
